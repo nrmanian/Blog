@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tilte:</b>
+  <%= @article.tilte %>
+</p>
+
+<p>
+	<b> Author:</b>
+	<!-- ramesh ternary is not a preferred in Ruby community so use the other one -->
+	<!-- %= @article.author ? @article.author.name : "no author" % -->
+
+	<%= if @article.author then @article.author.name else "no author" end %>
+
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @article.body %>
+</p>
+
+<%= form_for  [@article,@comment] do |f| %>
+	<%= f.label :body %> <br />
+	<%= f.text_area :body %>
+	<%= f.submit %>
+<% end %>
+
+<h4> Comments </h4>
+
+<P>
+	<% @article.comments.each do |c| %>
+		<%= c.body %> 
+		<br/>
+	<% end %>
+</p>
+
+
+
+
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
